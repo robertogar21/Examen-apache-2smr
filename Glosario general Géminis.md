@@ -11,56 +11,56 @@ Antes de configurar, es necesario instalar y saber controlar el estado del servi
     ```bash
     sudo apt update
     ```
-    *[span_0](start_span)Garantiza que se reflejen las versiones más recientes de los paquetes[span_0](end_span).*
+    *[0]()Garantiza que se reflejen las versiones más recientes de los paquetes[0]().*
 
 * **Instalar Apache:**
     ```bash
     sudo apt install apache2
     ```
-    *[span_1](start_span)Instala el servidor y todas sus dependencias requeridas[span_1](end_span).*
+    *[1]()Instala el servidor y todas sus dependencias requeridas[1]().*
 
 ### Gestión del proceso (Systemctl)
 * **Verificar estado:**
     ```bash
     sudo systemctl status apache2
     ```
-    *[span_2](start_span)Comprueba si el servicio está activo y en ejecución[span_2](end_span).*
+    *[2]()Comprueba si el servicio está activo y en ejecución[2]().*
 
 * **Iniciar servicio:**
     ```bash
     sudo systemctl start apache2
     ```
-    [span_3](start_span)
+    [3]()
 
 * **Detener servicio:**
     ```bash
     sudo systemctl stop apache2
     ```
-    [span_3](end_span)
+    [3]()
 
 * **Reiniciar (Stop + Start):**
     ```bash
     sudo systemctl restart apache2
     ```
-    *[span_4](start_span)Se usa para aplicar cambios mayores[span_4](end_span).*
+    *[4]()Se usa para aplicar cambios mayores[4]().*
 
 * **Recargar (Reload):**
     ```bash
     sudo systemctl reload apache2
     ```
-    *[span_5](start_span)Aplica cambios de configuración sin perder las conexiones activas[span_5](end_span).*
+    *[5]()Aplica cambios de configuración sin perder las conexiones activas[5]().*
 
 * **Habilitar al arranque:**
     ```bash
     sudo systemctl enable apache2
     ```
-    *[span_6](start_span)Configura Apache para iniciarse automáticamente al encender el servidor[span_6](end_span).*
+    *[6]()Configura Apache para iniciarse automáticamente al encender el servidor[6]().*
 
 * **Deshabilitar al arranque:**
     ```bash
     sudo systemctl disable apache2
     ```
-    [span_7](start_span)
+    [7]()
 
 ---
 
@@ -69,78 +69,78 @@ Antes de configurar, es necesario instalar y saber controlar el estado del servi
 Es vital conocer la estructura de archivos de Apache para la configuración.
 
 ### Archivos de Configuración (`/etc/apache2`)
-* **`/etc/apache2/apache2.conf`**: Archivo principal de configuración global[span_7](end_span).
-* **[span_8](start_span)`/etc/apache2/ports.conf`**: Especifica los puertos de escucha (80 por defecto, 443 para SSL)[span_8](end_span).
-* **[span_9](start_span)`/etc/apache2/sites-available/`**: Directorio donde se crean los archivos de configuración de los sitios virtuales (Virtual Hosts)[span_9](end_span).
-* **[span_10](start_span)`/etc/apache2/sites-enabled/`**: Directorio con enlaces simbólicos a los sitios que están realmente activos[span_10](end_span).
+* **`/etc/apache2/apache2.conf`**: Archivo principal de configuración global[7]().
+* **[8]()`/etc/apache2/ports.conf`**: Especifica los puertos de escucha (80 por defecto, 443 para SSL)[8]().
+* **[9]()`/etc/apache2/sites-available/`**: Directorio donde se crean los archivos de configuración de los sitios virtuales (Virtual Hosts)[9]().
+* **[10]()`/etc/apache2/sites-enabled/`**: Directorio con enlaces simbólicos a los sitios que están realmente activos[10]().
 
 ### Contenido Web y Logs
-* **[span_11](start_span)`/var/www/html`**: Directorio raíz por defecto donde se aloja el contenido web[span_11](end_span).
-* **[span_12](start_span)`/var/log/apache2/access.log`**: Registro de todas las solicitudes hechas al servidor[span_12](end_span).
-* **[span_13](start_span)`/var/log/apache2/error.log`**: Registro de errores del servidor[span_13](end_span).
+* **[11]()`/var/www/html`**: Directorio raíz por defecto donde se aloja el contenido web[11]().
+* **[12]()`/var/log/apache2/access.log`**: Registro de todas las solicitudes hechas al servidor[12]().
+* **[13]()`/var/log/apache2/error.log`**: Registro de errores del servidor[13]().
 
 ### Resolución de Nombres Local
 Para probar dominios sin un servidor DNS real, se modifica el archivo `hosts`:
-* **[span_14](start_span)Linux:** `/etc/hosts`[span_14](end_span).
-* **[span_15](start_span)Windows:** `C:\Windows\System32\drivers\etc\hosts`[span_15](end_span).
-* **[span_16](start_span)Formato:** `IP nombre_dominio` (Ej: `192.168.3.1 www.ejemplo.com`)[span_16](end_span).
+* **[14]()Linux:** `/etc/hosts`[14]().
+* **[15]()Windows:** `C:\Windows\System32\drivers\etc\hosts`[15]().
+* **[16]()Formato:** `IP nombre_dominio` (Ej: `192.168.3.1 www.ejemplo.com`)[16]().
 
 ---
 
 ## 3. Virtual Hosts (Sitios Virtuales)
 
-[span_17](start_span)Permite alojar varios dominios en un solo servidor[span_17](end_span).
+[17]()Permite alojar varios dominios en un solo servidor[17]().
 
 ### Pasos de creación
 1.  **Crear estructura de directorios:**
     ```bash
     sudo mkdir -p /var/www/[ejemplo.com/html](https://ejemplo.com/html)
     ```
-    *[span_18](start_span)La opción `-p` crea los directorios padres necesarios[span_18](end_span).*
+    *[18]()La opción `-p` crea los directorios padres necesarios[18]().*
 
 2.  **Asignar permisos:**
     * Asignar propietario:
         ```bash
         sudo chown -R $USER:$USER /var/www/[ejemplo.com/html](https://ejemplo.com/html)
         ```
-        [span_19](start_span)
+        [19]()
     * Asegurar permisos (lectura/ejecución):
         ```bash
         sudo chmod -R 755 /var/www/ejemplo.com
         ```
-        [span_19](end_span)
+        [19]()
 
 3.  **Crear archivo de configuración del sitio:**
     * Se recomienda copiar el predeterminado para no modificar el original:
         ```bash
         sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/ejemplo.com.conf
         ```
-        *[span_20](start_span)Nota: Comando deducido del contexto de copiar contenido[span_20](end_span).*
+        *[20]()Nota: Comando deducido del contexto de copiar contenido[20]().*
 
 4.  **Editar directivas del Virtual Host:**
     * Archivo: `/etc/apache2/sites-available/ejemplo.com.conf`
-    * **[span_21](start_span)ServerName:** Dominio base (ej: `ejemplo.com`)[span_21](end_span).
-    * **[span_22](start_span)ServerAlias:** Otros nombres (ej: `www.ejemplo.com`)[span_22](end_span).
-    * **[span_23](start_span)DocumentRoot:** Ruta a los archivos web (ej: `/var/www/ejemplo.com/html`)[span_23](end_span).
+    * **[21]()ServerName:** Dominio base (ej: `ejemplo.com`)[21]().
+    * **[22]()ServerAlias:** Otros nombres (ej: `www.ejemplo.com`)[22]().
+    * **[23]()DocumentRoot:** Ruta a los archivos web (ej: `/var/www/ejemplo.com/html`)[23]().
 
 ### Herramientas de activación
 * **Habilitar un sitio:**
     ```bash
     sudo a2ensite ejemplo.com.conf
     ```
-    *[span_24](start_span)[span_25](start_span)Crea el enlace simbólico en sites-enabled[span_24](end_span)[span_25](end_span).*
+    *[24]()[25]()Crea el enlace simbólico en sites-enabled[24]()[25]().*
 
 * **Deshabilitar un sitio:**
     ```bash
     sudo a2dissite 000-default.conf
     ```
-    [span_26](start_span)
+    [26]()
 
 * **Comprobar sintaxis:**
     ```bash
     sudo apache2ctl configtest
     ```
-    *Debe devolver "Syntax OK"[span_26](end_span).*
+    *Debe devolver "Syntax OK"[26]().*
 
 ---
 
@@ -154,16 +154,16 @@ Se utiliza el comando `htpasswd` para gestionar el archivo de contraseñas.
     ```bash
     htpasswd -c /etc/apache2/password nombre_usuario
     ```
-    *La opción `-c` crea el fichero nuevo. [span_27](start_span)Se pedirá la contraseña interactivamente[span_27](end_span).*
+    *La opción `-c` crea el fichero nuevo. [27]()Se pedirá la contraseña interactivamente[27]().*
 
 * **Añadir usuarios adicionales:**
     ```bash
     htpasswd /etc/apache2/password otro_usuario
     ```
-    *[span_28](start_span)NO usar `-c` si el archivo ya existe, o se sobrescribirá[span_28](end_span).*
+    *[28]()NO usar `-c` si el archivo ya existe, o se sobrescribirá[28]().*
 
 ### Configuración en Apache (`.conf`)
-[span_29](start_span)Para proteger una carpeta, se añade un bloque `<Directory>` dentro del archivo de configuración del sitio (Virtual Host)[span_29](end_span).
+[29]()Para proteger una carpeta, se añade un bloque `<Directory>` dentro del archivo de configuración del sitio (Virtual Host)[29]().
 
 ```apache
 <Directory /var/www/dominio/html/carpeta_privada>
